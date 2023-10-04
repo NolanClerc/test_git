@@ -22,20 +22,20 @@ def create_board():
 
 # Fonction pour vérifier si une colonne est valide pour placer un jeton
 def is_valid_move(board, col):
-    continue
+    True
 
 # Fonction pour placer un jeton dans une colonne
 def make_move(board, col, player):
-    continue
+    pass
 
 # Fonction pour vérifier si un joueur a gagné
 def is_winner(board, player):
-    continue
+    pass
 
 
 # Fonction pour minimax avec élagage alpha-beta
 def minimax(board, depth, alpha, beta, maximizing, player):
-    continue
+    pass
 
 # Fonction pour initialiser la fenêtre Pygame
 def init_pygame():
