@@ -33,9 +33,49 @@ def is_winner(board, player):
     pass
 
 
+def evaluate(board):
+    if is_winner(board, 1):
+        return 1000
+    elif is_winner(board, -1):
+        return -1000
+    else:
+        return 0
+
 # Fonction pour minimax avec élagage alpha-beta
 def minimax(board, depth, alpha, beta, maximizing, player):
-    pass
+    if depth == 0 or is_winner(board, 1) or is_winner(board, -1):
+        return evaluate(board), None
+
+    if maximizing:
+        max_eval = -np.inf
+        best_move = None
+        for col in range(COLS):
+            if is_valid_move(board, col):
+                temp_board = board.copy()
+                make_move(temp_board, col, player)
+                eval, _ = minimax(temp_board, depth - 1, alpha, beta, False, -player)
+                if eval > max_eval:
+                    max_eval = eval
+                    best_move = col
+                alpha = max(alpha, eval)
+                if beta <= alpha:
+                    break
+        return max_eval, best_move
+    else:
+        min_eval = np.inf
+        best_move = None
+        for col in range(COLS):
+            if is_valid_move(board, col):
+                temp_board = board.copy()
+                make_move(temp_board, col, -player)
+                eval, _ = minimax(temp_board, depth - 1, alpha, beta, True, -player)
+                if eval < min_eval:
+                    min_eval = eval
+                    best_move = col
+                beta = min(beta, eval)
+                if beta <= alpha:
+                    break
+        return min_eval, best_move
 
 # Fonction pour initialiser la fenêtre Pygame
 def init_pygame():
