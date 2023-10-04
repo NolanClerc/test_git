@@ -39,7 +39,32 @@ def make_move(board, col, player):
 
 # Fonction pour vérifier si un joueur a gagné
 def is_winner(board, player):
-    pass
+    # Vérification des alignements horizontaux
+    for row in board:
+        for col in range(len(row) - 3):
+            if all(row[col + i] == player for i in range(4)):
+                return True
+
+    # Vérification des alignements verticaux
+    for col in range(len(board[0])):
+        for row in range(len(board) - 3):
+            if all(board[row + i][col] == player for i in range(4)):
+                return True
+
+    # Vérification des alignements diagonaux (de haut en bas, gauche à droite)
+    for row in range(len(board) - 3):
+        for col in range(len(board[0]) - 3):
+            if all(board[row + i][col + i] == player for i in range(4)):
+                return True
+
+    # Vérification des alignements diagonaux (de haut en bas, droite à gauche)
+    for row in range(len(board) - 3):
+        for col in range(3, len(board[0])):
+            if all(board[row + i][col - i] == player for i in range(4)):
+                return True
+
+    return False
+
 
 
 def evaluate(board):
