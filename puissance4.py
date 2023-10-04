@@ -22,11 +22,20 @@ def create_board():
 
 # Fonction pour vérifier si une colonne est valide pour placer un jeton
 def is_valid_move(board, col):
-    True
+    # Vérifie si la colonne est valide (dans les limites du plateau)
+    if col < 0 or col >= len(board[0]):
+        return False
 
 # Fonction pour placer un jeton dans une colonne
 def make_move(board, col, player):
-    pass
+    # Parcours les lignes du bas vers le haut pour trouver la première case vide dans la colonne
+    for row in range(len(board) - 1, -1, -1):
+        if board[row][col] == 0:
+            board[row][col] = player
+            return True  # Le coup a été effectué avec succès
+
+    # Si la colonne est pleine, le coup est invalide
+    return False
 
 # Fonction pour vérifier si un joueur a gagné
 def is_winner(board, player):
